@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Upload";
+}
+
+<div class="jumbotron">
+    <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+        <div>
+            <div>
+                <p>Upload one or more files using this form:</p>
+                <input type="file" name="files" multiple />
+            </div>
+        </div>
+        
+        <div>
+            <div>
+                <input type="submit" value="Upload" />
+            </div>
+        </div>
+    </form>
+</div>

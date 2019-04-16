@@ -1,0 +1,104 @@
+﻿@model PaginatedList<Weather>
+
+@{
+    ViewData["Title"] = "Watch";
+}
+
+<br />
+<p> Сортировать по: </p>
+<a class="btn btn-default" asp-action="Watch" asp-route-sortOrder="year">год</a>
+<a class="btn btn-default" asp-action="Watch" asp-route-sortOrder="mounth">месяц</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Дата
+            </th>
+            <th>
+                Время
+            </th>
+            <th>
+                Температура воздуха
+            </th>
+            <th>
+                Относительная влажность воздуха
+            </th>
+            <th>
+                Точка росы
+            </th>
+            <th>
+                Атмосферное давление
+            </th>
+            <th>
+                Направление ветра
+            </th>
+            <th>
+                Скорость ветра
+            </th>
+            <th>
+                Облачность
+            </th>
+            <th>
+                Нижняя граница облачности
+            </th>
+            <th>
+                Горизонтальная видимость
+            </th>
+            <th>
+                Погодные явления
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Date.Value.ToLocalTime().ToString(@"dd.MM.yyyy")
+                </td>
+                <td>
+                    @item.Time
+                </td>
+                <td>
+                    @item.AirTemperature
+                </td>
+                <td>
+                    @item.Humidity
+                </td>
+                <td>
+                    @item.DewPoint
+                </td>
+                <td>
+                    @item.Pressure
+                </td>
+                <td>
+                    @item.WindDirection
+                </td>
+                <td>
+                    @item.WindSpeed
+                </td>
+                <td>
+                    @item.Overcast
+                </td>
+                <td>
+                    @item.CloudBase
+                </td>
+                <td>
+                    @item.HorizontalVisibility
+                </td>
+                <td>
+                    @item.WeatherConditions
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Watch" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled">Previous</a>
+<a asp-action="Watch" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">Next</a>
